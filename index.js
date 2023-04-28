@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import {  productSchema, customerSchema } from './model/product.js';
+import {  productSchema } from './model/product.js';
+import {  customerSchema } from './model/customer.js';
 
 // const url = 'mongodb://localhost:27017/shop';
 const url = 'mongodb://127.0.0.1:27017/shop';
@@ -20,12 +21,7 @@ mongoose.connect(url)
 const connection = mongoose.createConnection(url, { maxPoolSize: 10 });
 const Product = connection.model('product', productSchema);
 const Customer = connection.model('customer', customerSchema);
-connection.on('open', () => {
-  console.log("Conected");
-});
-connection.on('error', (err) => {
-  console.log(err);
-});
+
 
 const getPurchases = async () => {
   const customers = await Customer.find();
