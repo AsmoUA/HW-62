@@ -50,7 +50,7 @@ app.get('/', async (req, res) => {
   let html = '<h1>Users purchases:</h1>';
 
   for (const purchase of purchases) {
-    html += `<div style="display: flex; justify-content: space-between; width: 200px; border: 1px solid black;"><span>${purchase.name}</span> <span>${purchase.title}</span> <span>Price: ${purchase.price}</span></div><br>`;
+    html += `<div style="display: flex; justify-content: space-between; width: 200px; border: 1px solid black; margin-bottom"><span>${purchase.name}</span> <span>${purchase.title}</span> <span>Price: ${purchase.price}</span></div><br>`;
   }
 
   res.send(html);
