@@ -1,7 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import {  productSchema } from './model/product.js';
-import {  customerSchema } from './model/customer.js';
+import {  Product } from './model/product.js';
+import {  Customer } from './model/customer.js';
 
 // const url = 'mongodb://localhost:27017/shop';
 const url = 'mongodb://127.0.0.1:27017/shop';
@@ -16,12 +16,6 @@ mongoose.connect(url)
             })
         })
   .catch((err) => { console.log(`DB connection error: ${err}`) });
-        
-
-const connection = mongoose.createConnection(url, { maxPoolSize: 10 });
-const Product = connection.model('product', productSchema);
-const Customer = connection.model('customer', customerSchema);
-
 
 const getPurchases = async () => {
   const customers = await Customer.find();
@@ -43,7 +37,7 @@ const getPurchases = async () => {
 app.get('/', async (req, res) => {
   const purchases = await getPurchases();
 
-  let html = '<h1>Users purchases:</h1>';
+  let html = '<h2>Users purchases:</h2>';
 
   for (const purchase of purchases) {
     html += `<div style="display: flex; justify-content: space-between; width: 200px; border: 1px solid black; margin-bottom: 16px"><span>${purchase.name}</span> <span>${purchase.title}</span> <span>Price: ${purchase.price}</span></div><br>`;

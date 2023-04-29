@@ -9,7 +9,9 @@ const productSchema = new Schema({
     category: String,
     brand: String
 });
+const url = 'mongodb://127.0.0.1:27017/shop';
 
-const Product = mongoose.model('product', productSchema);
+const connection = mongoose.createConnection(url, { maxPoolSize: 10 });
+const Product = connection.model('product', productSchema);
 
-export {Product, productSchema};
+export {Product};
